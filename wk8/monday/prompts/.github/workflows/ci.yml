@@ -1,0 +1,48 @@
+# Reference copy; GitHub executes /.github/workflows/ci.yml.
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: wk8/monday/prompts
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: wk8/monday/prompts/requirements.txt
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Lint
+        run: ruff check .
+      - name: Unit tests
+        run: pytest -q
+
+  eval:
+    needs: lint-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Eval gate
+        run: python eval_prompts.py --golden evals/golden.jsonl --threshold 0.85
+        env:
+          PROMPT_VERSION: '1.2.0'
+          # Optional for future live calls; unused by the classroom stub.
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          TRIAGE_TEMPERATURE: ${{ vars.TRIAGE_TEMPERATURE || '0' }}

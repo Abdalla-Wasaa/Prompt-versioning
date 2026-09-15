@@ -1,4 +1,7 @@
-import json, sys, urllib.request, argparse
+import json
+import sys
+import urllib.request
+import argparse
 from pathlib import Path
 
 DEFAULT_PIN = Path(__file__).resolve().parent / "pin.json"

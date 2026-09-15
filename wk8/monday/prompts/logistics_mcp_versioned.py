@@ -1,7 +1,8 @@
 """AfyaPlus logistics MCP, semver in metadata plus a version resource."""
 from mcp.server.fastmcp import FastMCP
 from pathlib import Path
-import json, logging
+import json
+import logging
 
 logging.basicConfig(filename='mcp_server.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')

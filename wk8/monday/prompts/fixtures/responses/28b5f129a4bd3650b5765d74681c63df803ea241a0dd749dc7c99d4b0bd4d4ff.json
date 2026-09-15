@@ -1,0 +1,19 @@
+{
+  "provenance": "Hand-authored classroom stub responses; not recorded model outputs or evidence of clinical quality.",
+  "prompt_version": "1.2.0",
+  "prompt_sha256": "28b5f129a4bd3650b5765d74681c63df803ea241a0dd749dc7c99d4b0bd4d4ff",
+  "by_id": {
+    "g001": {
+      "expected_urgency": "medium",
+      "text": "Contact a clinic for guidance about the fever. This is health education, not a diagnosis; seek professional care when unsure."
+    },
+    "g002": {
+      "expected_urgency": "high",
+      "text": "Seek urgent medical care now at an emergency facility or clinic. This is not a diagnosis; professional assessment is needed."
+    },
+    "g003": {
+      "expected_urgency": "low",
+      "text": "Take time to rest. This is health education, not a diagnosis; seek professional care if symptoms persist or worsen or when unsure."
+    }
+  }
+}

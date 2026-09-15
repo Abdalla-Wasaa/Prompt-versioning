@@ -1,0 +1,5 @@
+fastapi==0.139.2
+pydantic==2.12.5
+mcp==1.28.1
+pytest==9.1.1
+ruff==0.16.7
