@@ -1,0 +1,44 @@
+Week 8 Monday: versioned logistics MCP
+
+Adding a tool is MINOR because existing calls still work, whereas renaming a required input is MAJOR because agents using the old schema must change their calls.
+
+Location: wk8/monday/prompts, beside the existing Lab 1 files.
+Run here: mcp dev logistics_mcp_versioned.py
+Keep this location for Tuesday's filename-based health probe.
+
+Inspector startup output only confirms that the Inspector launched.
+Open the printed browser URL, connect using the prefilled STDIO configuration,
+then list tools and resources. Expect check_stock and list_low_stock.
+Read version://current: expect 1.1.0.
+Call list_low_stock with clinic_id=kisumu-01:
+{"clinic":"Kisumu Central","low_stock":[{"item":"ors","quantity":12},{"item":"paracetamol","quantity":30}],"mcp_version":"1.1.0"}
+Call check_stock with clinic_id=kisumu-01 and item=ors:
+{"clinic":"Kisumu Central","item":"ors","quantity":12,"reorder_needed":true}
+
+Versioning:
+- MINOR: add a tool while preserving all existing input/output contracts.
+- MAJOR: rename an existing response field, change required inputs, or remove tools.
+- PATCH: compatible fixes that do not change the contract.
+- The planned required-input rename from item to item_code is draft only for
+  2.0.0, with a proposed dual-argument shim in 1.2.x and a minimum 30-day
+  deprecation window; neither change is implemented and the live pin is 1.1.0.
+- version://current is the application version pin; no unsupported version=
+  argument is passed to FastMCP. Do not confuse SDK metadata with this lab pin.
+
+Important baseline discrepancy:
+The actual Week 6 original is preserved byte-for-byte as logistics_mcp.py
+beside this file, copied from wk6/afyaplus-platform/thursday/logistics_mcp.py.
+Its check_stock(item: str) -> str differs from the supplied Week 8 snippet's
+check_stock(clinic_id: str, item: str) -> dict. It also exposes route/ETA tools
+and clinics://directory that the supplied slim lab server does not include.
+Therefore an unchanged Week 6 schema cannot honestly be claimed here.
+The 1.1.0 exercise label is relative only to the supplied lab baseline.
+A real replacement of the repository's Week 6 server needs a MAJOR release,
+or an implementation preserving its original tools, resources and schemas.
+The copied original expects the Week 6 fixture format; run the original in
+its Week 6 folder. The adjacent copy is a review artifact, not a runnable
+server against the Week 8 fixture.
+
+The existing Week 8 clinics.json was retained without changing stock numbers.
+The lab prose says 'at or below', but its code uses <; this server follows <.
+Loading relative to __file__ allows Tuesday's probe to launch from another cwd.

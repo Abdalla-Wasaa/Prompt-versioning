@@ -1,0 +1,12 @@
+[
+  {"id": "kisumu-01", "name": "Kisumu Central", "county": "Kisumu", "lat": -0.0917, "lon": 34.7680,
+   "stock": {"ors": 12, "paracetamol": 30, "amoxicillin": 100}, "reorder_level": 50},
+  {"id": "vihiga-02", "name": "Vihiga Health Post", "county": "Vihiga", "lat": 0.0504, "lon": 34.7223,
+   "stock": {"ors": 90, "paracetamol": 200, "amoxicillin": 8}, "reorder_level": 50},
+  {"id": "kisii-03", "name": "Kisii Family Clinic", "county": "Kisii", "lat": -0.6817, "lon": 34.7666,
+   "stock": {"ors": 30, "paracetamol": 150, "amoxicillin": 75}, "reorder_level": 50},
+  {"id": "homabay-04", "name": "Homa Bay Lakeside Clinic", "county": "Homa Bay", "lat": -0.5273, "lon": 34.4571,
+   "stock": {"ors": 5, "paracetamol": 40, "amoxicillin": 0}, "reorder_level": 50},
+  {"id": "kisumu-west-05", "name": "Kisumu West Dispensary", "county": "Kisumu", "lat": -0.1044, "lon": 34.6900,
+   "stock": {"ors": 60, "paracetamol": 80, "amoxicillin": 22}, "reorder_level": 50}
+]
