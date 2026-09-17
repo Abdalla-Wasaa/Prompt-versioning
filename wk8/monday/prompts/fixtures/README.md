@@ -25,4 +25,6 @@ exit 1; restore the golden case after this experiment.
 by `python eval_quarantine.py`. It starts empty, so all cases remain active.
 The gate fails if any active case fails or more than 5% of cases are quarantined.
 With the current three cases, quarantining even one exceeds that limit.
-This script uses stub urgency scoring; it does not call a model.
+This script scores the hash-matched classroom response fixture on urgency and
+safety properties; it does not call a model. The full golden gate still runs
+at threshold 0.85, so quarantine does not bypass that check.
