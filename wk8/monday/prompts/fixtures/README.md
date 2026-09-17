@@ -20,3 +20,11 @@ PROMPT_VERSION=1.3.0-candidate python eval_prompts.py --threshold 0.85
 The baseline should report 3/3 and exit 0. The candidate should report a missing
 fixture and exit 1. Changing one golden expected_urgency should report 2/3 and
 exit 1; restore the golden case after this experiment.
+
+`quarantine.json` lists golden case IDs excluded from the active failure count
+by `python eval_quarantine.py`. It starts empty, so all cases remain active.
+The gate fails if any active case fails or more than 5% of cases are quarantined.
+With the current three cases, quarantining even one exceeds that limit.
+This script scores the hash-matched classroom response fixture on urgency and
+safety properties; it does not call a model. The full golden gate still runs
+at threshold 0.85, so quarantine does not bypass that check.

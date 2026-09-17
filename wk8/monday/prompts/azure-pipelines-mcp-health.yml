@@ -1,0 +1,18 @@
+# Job template: include under jobs after an existing job named eval.
+jobs:
+  - job: mcp_health
+    dependsOn: eval
+    timeoutInMinutes: 5
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - checkout: self
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.11'
+      - script: python -m pip install -r requirements.txt
+        workingDirectory: $(Build.SourcesDirectory)/wk8/monday/prompts
+        displayName: Install dependencies
+      - script: python scripts/check_mcp_health.py
+        workingDirectory: $(Build.SourcesDirectory)/wk8/monday/prompts
+        displayName: MCP health gate (stdio)

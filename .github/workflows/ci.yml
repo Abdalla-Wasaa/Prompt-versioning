@@ -38,6 +38,8 @@ jobs:
           python-version: '3.11'
       - name: Install
         run: pip install -r requirements.txt
+      - name: Quarantine audit
+        run: python eval_quarantine.py
       - name: Eval gate
         run: python eval_prompts.py --golden evals/golden.jsonl --threshold 0.85
         env:
@@ -45,3 +47,18 @@ jobs:
           # Optional for future live calls; unused by the classroom stub.
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           TRIAGE_TEMPERATURE: ${{ vars.TRIAGE_TEMPERATURE || '0' }}
+
+
+  mcp-health:
+    needs: eval
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: MCP health gate (Route A stdio handshake)
+        run: python scripts/check_mcp_health.py
+      # Do not curl :8100 against mcp.run() stdio, nothing is listening there.
